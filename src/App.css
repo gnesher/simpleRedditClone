@@ -1,0 +1,43 @@
+
+/* HEADER */
+.header {
+    border-bottom: 1px solid #5f99cf;
+    position: relative;
+    background-color: #cee3f8;
+    height: 25px;
+    line-height: 25px;
+}
+/* UP / Down Buttons  */
+.up, .down {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    background: #cccccc;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #aaaaaa;
+    box-shadow: 1px 2px 15px #cccccc;
+    text-align:center;
+    line-height:20px;
+}
+.up:before {
+    content:"";
+    display:inline-block;
+    width: 0;
+    height: 0;
+    vertical-align:middle;
+    border-style: solid;
+    border-width: 0 5px 10px 5px;
+    border-color: transparent transparent #007bff transparent;
+}
+
+.down:before {
+    content:'';
+    display:inline-block;
+    vertical-align:middle;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8.7px 5px 0 5px;
+    border-color: #007bff transparent transparent transparent;
+}
