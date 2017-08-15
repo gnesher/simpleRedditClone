@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RedditItem from './redditItem';
-import mockData from '../data/redditData.json';
+import NewItem from './newItem';
 import _ from 'lodash';
 
 class RedditList extends Component {
@@ -8,8 +8,38 @@ class RedditList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listItems: mockData
+            listItems: []
         };
+    }
+
+    componentDidMount() {
+        fetch('http://www.reddit.com/.json')
+            .then((response) => {
+                return response.json();
+            })
+            .then((json)=> {
+                this.setState({
+                    listItems: json.data.children.map(
+                        (item) => {
+                            return ({
+                                title: item.data.title,
+                                id: item.data.id,
+                                votes: item.data.ups 
+                            });
+                        }
+                    )
+                })
+            });
+    }
+
+    addItem(text) {
+        this.setState({
+            listItems: [...this.state.listItems, {
+                title: text,
+                votes: 0,
+                id: text
+            }]
+        });
     }
 
     updateVotes(key, newValue) {
@@ -26,10 +56,12 @@ class RedditList extends Component {
     render() {
         return (
             <div className="RedditList">
+                <NewItem addItem={this.addItem.bind(this)} />
                 {
                     this.state.listItems.map((item) => {
                         return <RedditItem 
                             {...item}
+                            key={item.id}
                             updateVotes={this.updateVotes.bind(this)} />
                     })
                 }
@@ -37,5 +69,7 @@ class RedditList extends Component {
         );
     }
 }
+
+
 
 export default RedditList;

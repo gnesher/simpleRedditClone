@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-class RedditList extends Component {
+class RedditItem extends Component {
+  
   render() {
     return (
       <div className="redditItem">
@@ -21,4 +23,10 @@ class RedditList extends Component {
   }
 }
 
-export default RedditList;
+RedditItem.propTypes = {
+  votes: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  updateVotes: PropTypes.func.isRequired
+}
+
+export default RedditItem;
